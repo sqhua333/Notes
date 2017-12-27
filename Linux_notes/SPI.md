@@ -28,7 +28,7 @@ f、在SPI总线上，某一时刻可以出现多个从机，但只能存在一�
 
 #### 2.1、SPI设备连接图
 
-![image](sdf)
+![image](http://p1jvdr9xx.bkt.clouddn.com/%E8%AE%BE%E5%A4%87%E8%BF%9E%E6%8E%A5%E6%A1%86%E5%9B%BE.gif)
 
 #### 2.2、SPI通信原理
 
@@ -50,15 +50,15 @@ b、CPOL=1，表示SCLK=1时处于空闲状态
 **CPHA(时钟相位) - 配置数据采样是在第几个边沿**  
 a、CPHA=0，表示数据采样时在第一个边沿，数据发送在第二个边沿  
 b、CPHA=1，表示数据采样是在第二个边沿，数据发送在第一个边沿  
-![image](sdf)  
+![image](http://p1jvdr9xx.bkt.clouddn.com/SPI%E6%97%B6%E5%BA%8F%E5%9B%BE.gif)  
 >PS：我们的主设备能够控制时钟，因为我们的SPI通信并不像UART或IIC通信那样有专门的通信周期，有专门的通信起始信号，有专门的结束信号；  
 >因此，SPI协议能够控制时钟信号线，当没有数据交流的时候我们的时钟线要么是保持高电平要么是保持低电平。
 
 #### 2.4 主从器件是如何输出bit1数据的
 
 假设时钟极性CPOL与时钟相位CPHA都被配置为0，从2.3节中插图来分析：  
-![image](sdf)  
+![image](http://p1jvdr9xx.bkt.clouddn.com/a.gif)  
 SCK的第一个时钟周期，时钟的上升沿采样数据，在时钟的下降沿输出数据。那主器件的输出口(MOSI)输出的bit1，在时钟的上升沿被从器件采样，那主器件是在何时刻输出bit1的呢？bit的输出时刻实际上在SCK信号有效前，比SCK上升沿还要早半个时钟周期。bit的输出时刻与SEL信号没有关系。  
-![image](sdf)  
+![image](http://p1jvdr9xx.bkt.clouddn.com/bit1%E6%95%B0%E6%8D%AE%E8%BE%93%E5%87%BA.gif)  
 这张图就可以很清楚的看出主从器件的bit1是怎样输出的。  
 再来看从器件，主器件的输入口MISO同样是在时钟的上升沿采样从器件输出的bit1的，那从器件又是何时刻输出bit1的呢。从器件是在sel信号有效后，立即输出bit1，尽管此时SCK信号还没有起效。
